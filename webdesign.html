@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+    <div class="nav">
+        <div class="logo">
+            <img src="voltway_logo.svg" width="65px" height="65px">
+            <p class="name">VoltWay Ai</p>
+        </div>
+        <div id="battery">
+            <svg class="battery_icon" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24"  fill="#000000">
+                <path d="M24,0V24H0V0Z" fill="none"/>
+                <path d="M20,10V8.33A1.34,1.34,0,0,0,18.67,7H8V17H18.67A1.34,1.34,0,0,0,20,15.67V14h2V10Z" fill-opacity="0.3"/>
+                <path d="M3.33,17H8V7H3.34A1.34,1.34,0,0,0,2,8.33v7.33A1.34,1.34,0,0,0,3.33,17Z"/>
+              </svg>
+        </div>
+    </div>
+
+    <div class="c1"></div>
+    <div class="c2"></div>
+    <div class="c3"></div>
+    <svg class="cloud" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#6BC6B2"
+        height="800px" width="800px" version="1.1" id="Layer_1" viewBox="0 0 512 512" xml:space="preserve">
+        <g>
+            <g>
+                <path
+                    d="M344.355,143.77c-89.868-88-242.103-39.712-264.598,83.945C34.71,234.249,0,273.123,0,319.952    c0,51.393,41.811,93.204,93.204,93.204h282.311c75.258,0,136.484-61.226,136.484-136.483    C512,189.244,430.284,123.682,344.355,143.77z" />
+            </g>
+        </g>
+    </svg>
+    <div class="circle">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#6BC6B2" version="1.1"
+            id="Capa_1" width="800px" height="800px" viewBox="0 0 483.73 483.73" xml:space="preserve" class="bolt">
+            <g>
+                <g>
+                    <polygon
+                        points="119.637,282.441 192.449,282.441 165.869,483.73 364.094,189.622 296.631,189.622 325.678,0   " />
+                </g>
+            </g>
+        </svg>
+    </div>
+    <div id="main">
+        <form id="chatForm">
+            <input type="text" id="userInput" name="q" placeholder="Enter your current location...">
+            <input type="text" id="userInput2" name="q" placeholder="Enter your destination...">
+            <button type="submit" class="Ask">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" id="up-arrow" width="512" height="512"
+                    x="0" y="0" version="1.1" viewBox="0 0 512 512" class="arrow" fill="#FFFFFF">
+                    <path
+                        d="M128.4 189.3L233.4 89c5.8-6 13.7-9 22.4-9s16.5 3 22.4 9l105.4 100.3c12.5 11.9 12.5 31.3 0 43.2-12.5 11.9-32.7 11.9-45.2 0L288 184.4v217c0 16.9-14.3 30.6-32 30.6s-32-13.7-32-30.6v-217l-50.4 48.2c-12.5 11.9-32.7 11.9-45.2 0-12.5-12-12.5-31.3 0-43.3z" />
+                </svg>
+            </button>
+        </form>
+        <p class="Watermark">VoltWay AI</p>
+    </div>
+    <div class="c4"></div>
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai";
+        const genAI = new GoogleGenerativeAI("AIzaSyAaFGO4sPh_ZteiSyyrh6NjaXxsvpBy5ZY");
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        document.getElementById("chatForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const userInput = document.getElementById("userInput").value.trim();
+            const userInput2 = document.getElementById("userInput2").value.trim();
+            let userText = document.createElement("p");
+            userText.innerText = `User: ${userInput} to ${userInput2}`;
+            let userdiv = document.createElement("div");
+            userdiv.appendChild(userText);
+            userdiv.style.width = "fit-content";
+            userdiv.style.height = "fit-content";
+            userdiv.style.background = "black";
+            userdiv.style.display = "flex";
+            userdiv.style.justifyContent = "center";
+            userdiv.style.padding = "5px";
+            userdiv.style.borderRadius = "12px";
+            userdiv.style.marginTop = "15px";
+            document.getElementById("main").append(userdiv);
+            const result = await model.generateContent(`I need help finding the best route from my ${userInput} to ${userInput2}. I drive an electric vehicle, so it’s important to include power stations or EV charging points along the way. Could you suggest a route that maximizes efficiency, ensuring there are enough charging stations for a smooth trip? Also, please indicate where I can charge along the route, and estimate the total travel time, including any charging stops and mention some quality cafe to visit near power.`);
+            let result2 = result.response.text();
+            result2 = result2.replace(/\*\**/g, '');
+            let aitext = document.createElement("p");
+            aitext.innerText = result2;
+            let aidiv = document.createElement("div");
+            aidiv.appendChild(aitext);
+            aidiv.style.width = "fit-content";
+            aidiv.style.height = "fit-content";
+            aidiv.style.background = "black";
+            aidiv.style.display = "flex";
+            aidiv.style.justifyContent = "center";
+            aidiv.style.padding = "8px";
+            aidiv.style.borderRadius = "12px";
+            aidiv.style.marginTop = "15px";
+            aidiv.style.marginLeft = "30vh";
+            aidiv.style.marginBottom = "14px";
+            let mapDiv = document.createElement("div");
+            mapDiv.id = "map";
+            mapDiv.style.width = "500px";
+            mapDiv.style.height = "400px";
+            mapDiv.style.marginLeft = "43vh";
+            mapDiv.style.marginBottom = "70px";
+            mapDiv.style.borderRadius = "30px";
+            document.getElementById("main").append(aidiv, mapDiv);
+            initMap(userInput, userInput2, mapDiv);
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places"
+        async></script>
+    <script>
+        function initMap(loc, des, mapDiv) {
+            const map = new google.maps.Map(mapDiv, {
+                zoom: 10,
+                center: { lat: 12.5211, lng: 76.8951 }
+            });
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
+
+            directionsService.route({
+                origin: `${loc}`,
+                destination: `${des}`,
+                travelMode: google.maps.TravelMode.DRIVING
+            }, (result) => {
+                directionsRenderer.setDirections(result);
+                const placesService = new google.maps.places.PlacesService(map);
+                const routePath = result.routes[0].overview_path;
+                const stepSize = Math.max(1, Math.floor(routePath.length / 10));
+                for (let i = 0; i < routePath.length; i += stepSize) {
+                    placesService.nearbySearch({
+                        location: routePath[i],
+                        radius: 2000,
+                        keyword: "electric vehicle charging station"
+                    }, (places) => {
+                        places.forEach(place => {
+                            new google.maps.Marker({
+                                position: place.geometry.location,
+                                map: map,
+                                title: place.name,
+                                icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                            });
+                        });
+                    });
+                    placesService.nearbySearch({
+                        location: routePath[i],
+                        radius: 500,
+                        keyword: "cafe"
+                    }, (places) => {
+                        places.forEach(place => {
+                            new google.maps.Marker({
+                                position: place.geometry.location,
+                                map: map,
+                                title: place.name,
+                                icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                            });
+                        });
+                    });
+                }
+            });
+            document.getElementById("userInput").value = "";
+            document.getElementById("userInput2").value = "";
+        }
+    </script>
+    <script>
+        let a = Math.floor(Math.random() * 101)
+        let battery=document.getElementById("battery")
+        para=document.createElement("p")
+        para.innerText=`${a}%`;
+        battery.appendChild(para)
+        console.log(a)
+        if (a < 20) {
+            alert("⚠️ Warning: Battery level is below 20%! Please charge your EV soon.")
+        }
+        if (a < 40) {
+            alert("🔋 Battery level is below 40%. Consider charging soon to avoid low power.")
+        }
+    </script>
+</body>
+</html>
